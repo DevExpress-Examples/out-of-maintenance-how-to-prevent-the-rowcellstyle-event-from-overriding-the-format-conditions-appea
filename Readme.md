@@ -1,3 +1,10 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [CustomGridControl.cs](./CS/GridView_PriorityRowCellStyle/CustomGridControl.cs) (VB: [CustomGridControl.vb](./VB/GridView_PriorityRowCellStyle/CustomGridControl.vb))
+* [Form1.cs](./CS/GridView_PriorityRowCellStyle/Form1.cs) (VB: [Form1.vb](./VB/GridView_PriorityRowCellStyle/Form1.vb))
+* [Program.cs](./CS/GridView_PriorityRowCellStyle/Program.cs) (VB: [Program.vb](./VB/GridView_PriorityRowCellStyle/Program.vb))
+<!-- default file list end -->
 # How to prevent the RowCellStyle event from overriding the Format Conditions appearance
 
 
