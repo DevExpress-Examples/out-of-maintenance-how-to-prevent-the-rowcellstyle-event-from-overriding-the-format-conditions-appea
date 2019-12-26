@@ -155,29 +155,29 @@ Namespace GridView_PriorityRowCellStyle
 	End Class
 	Public Class CustomGridViewInfo
 		Inherits GridViewInfo
-		Public Sub New(ByVal gridView As GridView)
-			MyBase.New(gridView)
-		End Sub
-		Protected Overrides Sub UpdateCellAppearanceCore(ByVal cell As GridCellInfo)
-			MyBase.UpdateCellAppearanceCore(cell)
-			If cell.IsDataCell Then
-				If (cell.State And GridRowCellState.FocusedCell) = 0 OrElse (Not View.IsEditing) Then
-					Dim condition As AppearanceObjectEx = Nothing
-					Dim priorityStyle As AppearanceObject = (CType(View, CustomGridView)).GetPriorityRowCellStyle(cell, cell.Appearance)
-					If priorityStyle IsNot cell.Appearance Then
-						If Not(CType(View, CustomGridView)).OverrideFormatCondition Then
-							condition = cell.RowInfo.ConditionInfo.GetCellAppearance(cell.Column)
-							If condition IsNot Nothing Then
-								priorityStyle = MergeAppearences(priorityStyle, condition, cell.Appearance)
-							End If
-						End If
-						cell.Appearance = priorityStyle
-					End If
-				End If
-			End If
-		End Sub
+        Public Sub New(ByVal gridView As GridView)
+            MyBase.New(gridView)
+        End Sub
+        Protected Overrides Sub UpdateCellAppearanceCore(cell As GridCellInfo, Optional allowCache As Boolean = True, Optional allowCondition As Boolean = True, Optional cellCondition As AppearanceObjectEx = Nothing)
+            MyBase.UpdateCellAppearanceCore(cell, allowCache, allowCondition, cellCondition)
+            If cell.IsDataCell Then
+                If (cell.State And GridRowCellState.FocusedCell) = 0 OrElse (Not View.IsEditing) Then
+                    Dim condition As AppearanceObjectEx = Nothing
+                    Dim priorityStyle As AppearanceObject = (CType(View, CustomGridView)).GetPriorityRowCellStyle(cell, cell.Appearance)
+                    If priorityStyle IsNot cell.Appearance Then
+                        If Not (CType(View, CustomGridView)).OverrideFormatCondition Then
+                            condition = cell.RowInfo.ConditionInfo.GetCellAppearance(cell.Column)
+                            If condition IsNot Nothing Then
+                                priorityStyle = MergeAppearences(priorityStyle, condition, cell.Appearance)
+                            End If
+                        End If
+                        cell.Appearance = priorityStyle
+                    End If
+                End If
+            End If
+        End Sub
 
-		Protected Overridable Function MergeAppearences(ByVal target As AppearanceObject, ByVal source As AppearanceObject, ByVal current As AppearanceObject) As AppearanceObject
+        Protected Overridable Function MergeAppearences(ByVal target As AppearanceObject, ByVal source As AppearanceObject, ByVal current As AppearanceObject) As AppearanceObject
 			If source.Options.UseBackColor Then
 				If (Not source.BackColor.IsEmpty) AndAlso source.BackColor = current.BackColor Then
 					target.BackColor = source.BackColor

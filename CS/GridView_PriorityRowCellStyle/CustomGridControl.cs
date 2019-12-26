@@ -115,9 +115,9 @@ namespace GridView_PriorityRowCellStyle
     public class CustomGridViewInfo : GridViewInfo
     {
         public CustomGridViewInfo(GridView gridView) : base(gridView) { }
-        protected override void UpdateCellAppearanceCore(GridCellInfo cell)
+        protected override void UpdateCellAppearanceCore(GridCellInfo cell, bool allowCache = true, bool allowCondition = true, AppearanceObjectEx cellCondition = null)
         {
-            base.UpdateCellAppearanceCore(cell);
+            base.UpdateCellAppearanceCore(cell, allowCache, allowCondition, cellCondition);
             if (cell.IsDataCell)
                 if ((cell.State & GridRowCellState.FocusedCell) == 0 || !View.IsEditing)
                 {
